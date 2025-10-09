@@ -1,23 +1,16 @@
-import { Component } from "../common/Component.js";
-import { AddTodo } from "./AddTodo.js";
-import { TodoList } from "./TodoList.js";
+import { AddTodo } from './AddTodo.js';
+import { TodoList } from './TodoList.js';
 
-export class App extends Component {
-  render() {
-    const container = document.createElement('div')
-    container.className = 'container'
-    container.innerHTML = `
-      <h1>My To Dos</h1>
-      <div id="wrapper-add"></div>
-      <div id="wrapper-todos"></div>
-    `
+export function App() {
+  const container = document.createElement('div');
+  container.classList.add('app');
 
-    const add = new AddTodo().render()
-    const todos = new TodoList().render()
+  const title = document.createElement('h1');
+  title.textContent = 'My To Dos';
 
-    container.querySelector('#wrapper-add').appendChild(add)
-    container.querySelector('#wrapper-todos').appendChild(todos)
+  container.appendChild(title);
+  container.appendChild(AddTodo());
+  container.appendChild(TodoList());
 
-    return container;
-  }
+  return container;
 }

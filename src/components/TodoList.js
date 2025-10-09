@@ -1,11 +1,20 @@
-import { Component } from "../common/Component.js";
-import { TodoItem } from "./TodoItem.js";
+import { todoContext } from '../contexts/TodoContext.js';
+import { TodoItem } from './TodoItem.js';
 
-export class TodoList extends Component {
-  render() {
-    const todoListElement = document.createElement('div')
-    todoListElement.className = "todo-list"
-    
-    return todoListElement;
+export function TodoList() {
+  const container = document.createElement('div');
+  container.classList.add('todo-list');
+
+  function render() {
+    container.innerHTML = '';
+    const todos = todoContext.getTodos();
+    todos.forEach(todo => {
+      container.appendChild(TodoItem(todo));
+    });
   }
+
+  todoContext.subscribe(render);
+  render();
+
+  return container;
 }
